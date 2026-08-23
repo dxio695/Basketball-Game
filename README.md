@@ -9,4 +9,6 @@ This is an MCU-based basketball game with IR sensor detection and automated scor
   <img width="50%" alt="Completed prototyp" src="https://github.com/user-attachments/assets/f34b2c3c-9737-45ab-b967-a0910b5d390b" />
 </p>
 
+<p align="center">
 <img width="400" alt="System flow diagram" src="https://github.com/user-attachments/assets/78147bbb-1421-4560-b439-0eae33df4829" />
+</p>

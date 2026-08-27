@@ -78,7 +78,7 @@ When a shot is detected, the LED and buzzer activate for 800 ms. Their timing al
 ## Firmware Structure
 
 ```text
-basketball_project/
+firmware/
 ├── include/
 │   └── PinMap.h
 ├── lib/

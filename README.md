@@ -1,4 +1,4 @@
-# Arcade Basketball Game
+# Basketball Game
 
 An ESP32-based arcade basketball game with automatic shot detection, score tracking, timed gameplay, and electromechanical control. Two IR sensors detect successful shots, two servos operate the moving mechanisms, and an SSD1309 OLED displays the timer and score.
 

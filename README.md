@@ -37,6 +37,28 @@ The ESP32 acts as the central controller and coordinates all input, processing, 
   <em>System flow from initialization to gameplay and final score display</em>
 </p>
 
+## System Operation
+
+### Game Control
+
+- Pressing the start button resets the score to **0** and begins a **90-second** round after the starting screen and **3–2–1** countdown.
+- During gameplay, the controller updates all subsystems. When the timer reaches **0**, the game stops and the OLED displays the final score.
+
+### Shot Detection
+
+- Two IR sensors on **GPIO 19** and **GPIO 18** detect new **HIGH-to-LOW** transitions, preventing repeated counts while a beam remains blocked.
+- A successful detection from either hoop adds **10 points**.
+
+### Motion Control
+
+- Two servos on **GPIO 32** and **GPIO 33** move from **0° to 180°**, reverse direction, and return to **0°**.
+- Movement uses non-blocking `millis()` timing, allowing sensing and display updates to continue.
+
+### Display and Feedback
+
+- The OLED shows the welcome screen, countdown, remaining time, current score, and final result.
+- Each successful shot activates the LED and buzzer for **800 ms**.
+
 ## Firmware Structure
 
 ```text
@@ -77,36 +99,6 @@ The main firmware is divided into the following modules:
 | `PinMap.h` | Stores the ESP32 pin assignments |
 | `main.cpp` | Initializes the system and starts or runs game rounds |
 | `hardware_test/` | Tests individual hardware components independently |
-
-## Game Control
-
-- Pressing the start button while the game is idle resets the score to **0** and the timer to **90 seconds**.
-- The OLED shows `Starting..` for 3 seconds, followed by a **3–2–1** countdown.
-- During gameplay, `runGame()` updates the sensors, servos, timer, feedback outputs, and OLED.
-- The timer decreases once per second. At **0**, the game stops and displays the final score.
-
-## Shot Detection
-
-- Two IR break-beam sensors monitor the hoops on **GPIO 19** and **GPIO 18**.
-- A shot is detected only when a sensor first changes from **HIGH to LOW**.
-- This edge detection prevents the same ball from being counted repeatedly while the beam remains broken.
-- A detection from either hoop adds **10 points**.
-
-## Motion Control
-
-- Two positional servos are connected to **GPIO 32** and **GPIO 33**.
-- Each servo moves from **0° to 180°**, reverses direction, and returns to **0°**.
-- Movement is scheduled with `millis()`, so sensor checks and display updates continue while the servos move.
-
-## Display and Feedback
-
-| Event | Output |
-|---|---|
-| Power on | OLED displays the basketball graphic and welcome screen |
-| Round starts | OLED displays `Starting..` and the 3–2–1 countdown |
-| Game running | OLED displays the remaining time and current score |
-| Shot detected | LED and buzzer activate for **800 ms** |
-| Timer reaches 0 | LED and buzzer turn off; OLED displays the final score |
 
 ## Hardware Configuration
 

@@ -134,7 +134,7 @@ The main firmware is divided into the following modules:
 
 The physical game combines electronic control with custom mechanical construction and 3D-printed parts.
 
-<img width="800" alt="3D modelled Court" src="https://github.com/user-attachments/assets/59b71d1a-8b7f-4310-a6b2-31a61b3ebb73" />
+<img width="400" alt="3D modelled Court" src="https://github.com/user-attachments/assets/59b71d1a-8b7f-4310-a6b2-31a61b3ebb73" />
 
 The repository includes:
 

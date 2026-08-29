@@ -37,44 +37,6 @@ The ESP32 acts as the central controller and coordinates all input, processing, 
   <em>System flow from initialization to gameplay and final score display</em>
 </p>
 
-## Game Control
-
-The `Game` module manages the main gameplay state. Pressing the start button begins a new round, resets the score to zero, sets the timer to 90 seconds, and displays a countdown on the OLED.
-
-During the round, the controller repeatedly checks the sensors, updates the servo positions, manages the timer, and refreshes the display. Each successful shot adds 10 points.
-
-When the timer reaches zero, the system stops the round, disables any active feedback outputs, and displays the final score.
-
-## Shot Detection
-
-Each hoop contains an IR sensor connected to the ESP32 as a digital input.
-
-The `IRSensorDriver` compares the current sensor state with its previous state. A shot is registered only when the beam changes from unbroken to broken, preventing one ball from being counted repeatedly while it remains inside the sensor beam.
-
-Either sensor can generate a scoring event during the game.
-
-## Motion Control
-
-The system uses two servo motors controlled by separate `ServoDriver` objects.
-
-Each servo repeatedly moves between 0° and 180°. Its direction reverses when it reaches either end of this range, producing continuous back-and-forth movement.
-
-Servo timing is controlled using `millis()` rather than a blocking delay, allowing shot detection, scoring, and display updates to continue while the servos move.
-
-## Display and Feedback
-
-The SSD1309 OLED communicates with the ESP32 using I²C and provides the main player interface.
-
-The display presents:
-
-- A welcome screen
-- A starting countdown
-- The remaining time
-- The current score
-- The final score
-
-When a shot is detected, the LED and buzzer activate for 800 ms. Their timing also uses `millis()`, allowing the rest of the game loop to continue running during the feedback period.
-
 ## Firmware Structure
 
 ```text
@@ -115,6 +77,36 @@ The main firmware is divided into the following modules:
 | `PinMap.h` | Stores the ESP32 pin assignments |
 | `main.cpp` | Initializes the system and starts or runs game rounds |
 | `hardware_test/` | Tests individual hardware components independently |
+
+## Game Control
+
+- Pressing the start button while the game is idle resets the score to **0** and the timer to **90 seconds**.
+- The OLED shows `Starting..` for 3 seconds, followed by a **3–2–1** countdown.
+- During gameplay, `runGame()` updates the sensors, servos, timer, feedback outputs, and OLED.
+- The timer decreases once per second. At **0**, the game stops and displays the final score.
+
+## Shot Detection
+
+- Two IR break-beam sensors monitor the hoops on **GPIO 19** and **GPIO 18**.
+- A shot is detected only when a sensor first changes from **HIGH to LOW**.
+- This edge detection prevents the same ball from being counted repeatedly while the beam remains broken.
+- A detection from either hoop adds **10 points**.
+
+## Motion Control
+
+- Two positional servos are connected to **GPIO 32** and **GPIO 33**.
+- Each servo moves from **0° to 180°**, reverses direction, and returns to **0°**.
+- Movement is scheduled with `millis()`, so sensor checks and display updates continue while the servos move.
+
+## Display and Feedback
+
+| Event | Output |
+|---|---|
+| Power on | OLED displays the basketball graphic and welcome screen |
+| Round starts | OLED displays `Starting..` and the 3–2–1 countdown |
+| Game running | OLED displays the remaining time and current score |
+| Shot detected | LED and buzzer activate for **800 ms** |
+| Timer reaches 0 | LED and buzzer turn off; OLED displays the final score |
 
 ## Hardware Configuration
 

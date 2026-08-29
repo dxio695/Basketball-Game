@@ -78,7 +78,7 @@ When a shot is detected, the LED and buzzer activate for 800 ms. Their timing al
 ## Firmware Structure
 
 ```text
-firmware/
+Firmware/
 ├── include/
 │   └── PinMap.h
 ├── lib/
@@ -130,20 +130,44 @@ The main firmware is divided into the following modules:
 | Buzzer | GPIO 16 | Audio shot feedback |
 | Start button | GPIO 27 | Starts a new game round |
 
-## Mechanical Design and Components
+## Mechanical Design
 
-The physical game combines electronic control with custom mechanical construction and 3D-printed parts.
+The physical structure was modelled in Fusion 360 and divided into four subassemblies so that each part could be developed, exported, and fabricated independently.
 
-<img width="700" alt="3D modelled Court" src="https://github.com/user-attachments/assets/59b71d1a-8b7f-4310-a6b2-31a61b3ebb73" />
+<p align="center">
+  <img width="700" alt="3D modelled Court" src="https://github.com/user-attachments/assets/59b71d1a-8b7f-4310-a6b2-31a61b3ebb73" />
+</p>
 
-The repository includes:
+<p align="center">
+  <em>Fusion 360 model of the complete basketball court assembly</em>
+</p>
 
-- Fusion 360 design file for the tube and handle assembly
-- STEP model for compatibility with other CAD software
-- AliExpress bill of materials
-- DigiKey bill of materials
+The mechanical design is organized as follows:
 
-The CAD files are stored in the repository root, while the component spreadsheets are available in the [`BOM`](BOM) directory.
+| Subassembly | Models | Responsibility |
+|---|---|---|
+| [`Basketball`](Enclosure/Basketball) | `Hoop`, `Pole` | Forms the scoring target and supports the hoop in position |
+| [`Court`](Enclosure/Court) | `test2_court` | Defines the complete court structure and overall mechanical layout |
+| [`Fan`](Enclosure/Fan) | `Fan Blade` | Provides the rotating element used by the ball-launching mechanism |
+| [`Launcher`](Enclosure/Launcher) | `Base`, `Tube` | Supports the launcher and guides the ball through the mechanism |
+
+Each model is provided in two formats:
+
+- **Fusion 360 (`.f3d`):** Preserves the editable design history for further modification.
+- **STEP (`.step`):** Provides a widely compatible model for other CAD and manufacturing software.
+
+All mechanical design files are stored in the [`Enclosure`](Enclosure) directory.
+
+## Bill of Materials
+
+Component purchasing was documented in separate spreadsheets for AliExpress and DigiKey. Each sheet records the vendor, part details, quantity, unit price, stock status, delivery estimate, total cost in NZD, and purchase link.
+
+| BOM | Components Covered |
+|---|---|
+| [AliExpress BOM](BOM/design_comp_bom_aliexpress.xlsx) | 2.42-inch OLED, I²S microphone, I²S audio amplifier, mini speaker, and MG90S 180°/360° servo options |
+| [DigiKey BOM](BOM/design_comp_bom_digikey.xlsx) | SEN0503 IR break-beam sensors and WT-1205 buzzer |
+
+The two spreadsheets provide the sourcing information used during prototype development. Reused, supplied, or structural items may not be included in these purchase requests.
 
 ## License
 

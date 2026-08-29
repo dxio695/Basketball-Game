@@ -134,6 +134,8 @@ The main firmware is divided into the following modules:
 
 The physical game combines electronic control with custom mechanical construction and 3D-printed parts.
 
+<img width="2082" height="1472" alt="image" src="https://github.com/user-attachments/assets/59b71d1a-8b7f-4310-a6b2-31a61b3ebb73" />
+
 The repository includes:
 
 - Fusion 360 design file for the tube and handle assembly

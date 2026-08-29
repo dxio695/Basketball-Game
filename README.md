@@ -92,13 +92,13 @@ The main firmware is divided into the following modules:
 
 | Module | Responsibility |
 |---|---|
-| `Game` | Coordinates the complete game state and hardware behaviour |
-| `IRSensorDriver` | Detects new IR beam interruptions |
-| `ServoDriver` | Controls non-blocking servo movement |
-| `OLEDDriver` | Manages all OLED screens and display updates |
-| `PinMap.h` | Stores the ESP32 pin assignments |
-| `main.cpp` | Initializes the system and starts or runs game rounds |
-| `hardware_test/` | Tests individual hardware components independently |
+| [`Game`](Firmware/lib/Game) | Coordinates the complete game state and hardware behaviour |
+| [`IRSensorDriver`](Firmware/lib/IRSensorDriver) | Detects new IR beam interruptions |
+| [`ServoDriver`](Firmware/lib/ServoDriver) | Controls non-blocking servo movement |
+| [`OLEDDriver`](Firmware/lib/OLEDDriver) | Manages all OLED screens and display updates |
+| [`PinMap.h`](Firmware/include/PinMap.h) | Stores the ESP32 pin assignments |
+| [`main.cpp`](Firmware/src/main.cpp) | Initializes the system and starts or runs game rounds |
+| [`hardware_test/`](Firmware/src/hardware_test) | Tests individual hardware components independently |
 
 ## Hardware Configuration
 

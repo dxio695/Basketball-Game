@@ -130,10 +130,10 @@ The mechanical design is organized as follows:
 
 | Subassembly | Models | Responsibility |
 |---|---|---|
-| `Basketball` | `Hoop`, `Pole` | Forms the scoring target and supports the hoop in position |
-| `Court` | `test2_court` | Defines the complete court structure and overall mechanical layout |
-| `Fan` | `Fan Blade` | Provides the rotating element used by the ball-launching mechanism |
-| `Launcher` | `Base`, `Tube` | Supports the launcher and guides the ball through the mechanism |
+| [`Basketball`](Enclosure/Basketball) | `Hoop`, `Pole` | Forms the scoring target and supports the hoop in position |
+| [`Court`](Enclosure/Court) | `test2_court` | Defines the complete court structure and overall mechanical layout |
+| [`Fan`](Enclosure/Fan) | `Fan Blade` | Provides the rotating element used by the ball-launching mechanism |
+| [`Launcher`](Enclosure/Launcher) | `Base`, `Tube` | Supports the launcher and guides the ball through the mechanism |
 
 Each model is provided in two formats:
 
